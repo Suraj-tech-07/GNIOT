@@ -1,4 +1,5 @@
 #include <stdio.h>
+<<<<<<< HEAD
 #include <string.h>
 #include <stdlib.h>
 char *stringReverse(char *st)
@@ -51,6 +52,17 @@ int main()
         num /= 16;
     }
     printf("%s", stringReverse(str));
+=======
+
+int main()
+{
+    int num = 7432;
+    char str[20]; // Allocate enough space for the string
+
+    sprintf(str, "%x", num);
+    printf("String: %s\n", str);
+
+>>>>>>> dc51a80f043777d8eeb001222c62665b970b1484
     return 0;
 }
 
