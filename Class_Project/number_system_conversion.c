@@ -1,3 +1,8 @@
+/*
+    Binary to All : ✓ Done
+    Decimal to
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -32,7 +37,12 @@ char *stringReverse(char *st)
     st[length] = '\0';
     return result;
 }
+
+// ************************************ Binary Coversions Block **************
+
 // Verifying Inputs
+
+// isBinary
 int isBinaryNumber(int num)
 {
     int isBin = 0; // initialy False
@@ -50,11 +60,32 @@ int isBinaryNumber(int num)
     }
     return isBin;
 }
-// Binary Input
+
+// isOctal
+
+int isOctalNumber(int num)
+{
+    int isOct = 0; // initialy False
+    while (num != 0)
+    {
+        if (num % 10 < 8 && num % 10 >= 0)
+        {
+            num = num / 10;
+            isOct = 1; // set to be true
+        }
+        else
+        {
+            break;
+        }
+    }
+    return isOct;
+}
+
+// User Input
 int userInput()
 {
     int num;
-    printf("Enter the Binary Number ");
+    printf("Enter the Number ");
     scanf("%d", &num);
     return num;
 }
@@ -73,6 +104,27 @@ int binaryToDecimal(int num)
     }
     return sum;
 }
+
+// ************************ Decimal To Other Converstions Here **************
+
+// Decimal to Binary
+char *decimalToBinary(int num)
+{
+    int rem;
+    char ch[2];
+    char str[20] = "";
+    while (num != 0)
+    {
+        rem = num % 2;
+
+        ch[0] = '0' + rem;
+        ch[1] = '\0';
+        strcat(str, ch);
+        num /= 2;
+    }
+    return stringReverse(str);
+}
+
 // Decimal to Octal
 int decimalToOctal(int num)
 {
@@ -171,14 +223,62 @@ int main()
             exit(1);
         }
         break;
-    // case 2:
-    //     octalInput();
-    //     outputMenuOptions();
-    //     break;
-    // case 3:
-    //     decimalInput();
-    //     outputMenuOptions();
-    //     break;
+    case 2:
+        number = userInput();
+        if (isOctalNumber(number))
+        {
+            outputMenuOptions();
+            printf("Enter Your Choice : ");
+            scanf("%d", &outputChoice);
+            switch (outputChoice)
+            {
+            case 1:
+                printf("\n\nThe Binary value of %d is %d\n", number, number);
+                break;
+            case 2:
+                printf("\n\nThe Octal value of %d is %d\n", number, decimalToOctal(binaryToDecimal(number)));
+                break;
+            case 3:
+                printf("\n\nThe Decimal value of %d is %d\n", number, binaryToDecimal(number));
+                break;
+            case 4:
+                printf("\n\nThe HexaDecimal value of %d is %s\n", number, decimalToHexaDecimal(binaryToDecimal(number)));
+                break;
+            default:
+                printf("Shi se chhose kro yaar...!");
+                break;
+            }
+        }
+        else
+        {
+            printf("Entered Number is not Binary.");
+            exit(1);
+        }
+        break;
+    case 3:
+        number = userInput();
+        outputMenuOptions();
+        printf("Enter Your Choice : ");
+        scanf("%d", &outputChoice);
+        switch (outputChoice)
+        {
+        case 1:
+            printf("\n\nThe Binary value of %d is %s\n", number, decimalToBinary(number));
+            break;
+        case 2:
+            printf("\n\nThe Octal value of %d is %d\n", number, decimalToOctal(number));
+            break;
+        case 3:
+            printf("\n\nThe Decimal value of %d is %d\n", number, number);
+            break;
+        case 4:
+            printf("\n\nThe HexaDecimal value of %d is %s\n", number, decimalToHexaDecimal(number));
+            break;
+        default:
+            printf("Shi se chhose kro yaar...!");
+            break;
+        }
+        break;
     // case 4:
     //     hexaDecimalInput();
     //     outputMenuOptions();
